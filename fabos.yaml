@@ -1,13 +1,11 @@
 ---
 name: Guestbook Example
 serviceVendorId: dac52253-a580-479a-84fe-2ca0ae90fb2c
-description: |
-  This service offering demonstrates the SLM abilities to deploy a guestbook application with NodePort configuration on a Kubernetes cluster.
+description: This service offering demonstrates the SLM abilities to deploy a guestbook application with NodePort configuration on a Kubernetes cluster.
 shortDescription: This service offering demonstrates the SLM abilities to deploy a guestbook application with NodePort configuration on a Kubernetes cluster.
 coverImageFilename: thumbnail.png
 serviceCategoryName: Application
 version:
-  id: 4a326dac-e78f-412b-88c0-2a07ee16358f
   version: 1.0.0
   serviceOptionCategories: []
   serviceRequirements: []
