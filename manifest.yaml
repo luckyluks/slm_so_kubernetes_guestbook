@@ -125,6 +125,7 @@ spec:
             memory: 100Mi
         ports:
         - containerPort: 80
+          name: web
 ---
 # SOURCE: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
 apiVersion: v1
@@ -138,12 +139,35 @@ spec:
   # if your cluster supports it, uncomment the following to automatically create
   # an external load-balanced IP for the frontend service.
   # type: LoadBalancer
-  #type: LoadBalancer
-  type: NodePort
+#  type: LoadBalancer
+#  type: NodePort
   ports:
     # the port that this service should serve on
-  - port: 80
-    nodePort: 30333
+  - name: web
+    port: 80
+    targetPort: web
+  #  nodePort: 30333
   selector:
     app: guestbook
     tier: frontend
+# custom added
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+#    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rewrite-target: /
+  name: guestbook
+spec:
+  ingressClassName: traefik
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
